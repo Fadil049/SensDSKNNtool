@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sensing for Data Science | KNN Lab</title>
+<link rel="stylesheet" href="style.css">
+<script src="lab.js" defer></script>
+</head>
+<body>
+<div id="knn-inline-lab">
+
+<header><div class="header-inner">
+<a href="#top" aria-label="Sensing for Data Science home"><img src="logo.png" alt="Sensing for Data Science" width="152"></a>
+<nav aria-label="Lesson"><a href="#lab" class="active">Playground</a><a href="#learn">How it works</a><a href="#challenge">Challenge</a></nav>
+</div></header>
+<main id="top">
+<section class="intro" aria-labelledby="title">
+<div><p class="eyebrow">SENSING FOR DATA SCIENCE / INTERACTIVE LAB</p>
+<h1 id="title">K-Nearest Neighbors<span>.</span></h1>
+<p>How can a computer label something new? Place a point on the graph and see how its closest neighbors vote.</p></div>
+<div class="hero-art" aria-hidden="true"><i></i><i></i><i></i><b></b><b></b><b></b><b></b><b></b><strong>?</strong></div>
+</section>
+<section id="lab" class="workspace" aria-label="KNN playground">
+<article class="panel plot-panel">
+<div class="panel-head"><div><h2>Classification playground</h2><p>Click or tap the graph to move the test point.</p></div><button id="reset" class="subtle" type="button">↺ Reset</button></div>
+<div class="plot-wrap">
+<svg id="plot" viewBox="0 0 640 380" tabindex="0" role="application" aria-label="Classification graph. Use arrow keys to move the test point.">
+<defs><pattern id="grid" x="40" y="20" width="55" height="55" patternUnits="userSpaceOnUse"><path d="M55 0H0V55" fill="none" stroke="#e2eaf0"/></pattern></defs>
+<rect x="40" y="20" width="550" height="330" rx="3" fill="#f8fbfd"/>
+<g id="boundary"></g>
+<rect x="40" y="20" width="550" height="330" rx="3" fill="url(#grid)" stroke="#dce6ee"/>
+<g id="axes" aria-hidden="true"></g><g id="marks" aria-hidden="true"></g>
+</svg>
+</div>
+<div class="legend" id="legend"></div>
+</article>
+<aside class="sidebar" aria-label="Experiment controls and result">
+<section class="panel settings">
+<h2>Experiment settings</h2>
+<label for="class-count">Number of classes</label>
+<select id="class-count">
+<option value="1">1 class</option><option value="2" selected>2 classes</option>
+<option value="3">3 classes</option><option value="4">4 classes</option><option value="5">5 classes</option>
+</select>
+<label for="dataset">Training data</label>
+<select id="dataset"><option value="clusters">Two clusters</option><option value="overlap">Overlapping groups</option><option value="rings">Inner and outer rings</option></select>
+<div class="range-head"><label for="k">Number of neighbors</label><output for="k" id="k-value">k = 5</output></div>
+<input id="k" type="range" min="1" max="15" value="5">
+<div class="range-scale" aria-hidden="true"><span>1</span><span id="k-mid">8</span><span id="k-max">15</span></div>
+<label for="metric">Distance metric</label>
+<select id="metric"><option value="euclidean">Euclidean · straight line</option><option value="manhattan">Manhattan · grid steps</option></select>
+<label class="toggle"><input type="checkbox" id="show-boundary"><span>Show prediction regions</span></label>
+</section>
+<section class="panel result" aria-live="polite" aria-atomic="true">
+<div class="result-head"><h2>Neighbor vote</h2><span id="prediction"></span></div>
+<div class="vote-track" id="vote-track" aria-hidden="true"></div>
+<div class="vote-counts" id="vote-counts"></div>
+<p id="explanation"></p>
+</section>
+</aside>
+</section>
+<section id="learn" class="lesson" aria-labelledby="learn-title"><h2 id="learn-title">How KNN works</h2>
+<div class="steps">
+<article><span>01</span><h3>Measure distance</h3><p>Compare the test point to each labeled example. Euclidean distance is a straight line. Manhattan distance adds the horizontal and vertical steps.</p></article>
+<article><span>02</span><h3>Pick the k closest</h3><p>The letter <strong>k</strong> tells the computer how many neighbors to ask. Changing k can change which points get a vote.</p></article>
+<article><span>03</span><h3>Count the votes</h3><p>Each neighbor votes for its own class. The class with the most votes wins. In this lab, a tie goes to the class whose nearest voting neighbor is closest to the test point.</p></article>
+</div></section>
+<section id="challenge" class="panel challenge" aria-labelledby="challenge-title">
+<div><p class="eyebrow">QUICK CHALLENGE</p><h2 id="challenge-title">Can more neighbors change the answer?</h2>
+<p>The challenge loads a point with <strong>k = 3</strong>. Look at the vote, then predict what will happen when k changes to 5.</p>
+<button id="load" type="button">Load challenge point</button></div>
+<div id="quiz" hidden><fieldset><legend>What will the prediction be at k = 5?</legend>
+<button type="button" data-guess="A">Class A</button><button type="button" data-guess="B">Class B</button>
+</fieldset><p id="feedback" aria-live="polite"></p></div>
+</section>
+</main>
+<footer>Sensing for Data Science <span>·</span> KNN Lab</footer>
+</div>
+
+</body>
+</html>
